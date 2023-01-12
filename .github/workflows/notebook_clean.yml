@@ -1,0 +1,21 @@
+# Workflow that uses marketplace action to verify whether Jupyter Notebook have had their outputs and
+# execution counts cleared, as to prevent nightmarish merge conflicts involving manually fixing opening/closing brackets
+# in JSON files.
+
+name: NotebookClean
+
+on:
+
+  [push]  # Check on every push
+
+jobs:
+
+  verify_notebook:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v3  # Check-out repository under $GITHUB_WORKSPACE, so your job can access it
+
+      - uses: ResearchSoftwareActions/EnsureCleanNotebooksAction@1.1   # Use Marketplace Action to verify
